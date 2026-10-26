@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250" font-family="Liberation Serif, Times New Roman, serif" font-size="17">
+  <defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker></defs>
+  <g fill="#fff" stroke="#000" stroke-width="1.3">
+    <rect x="10" y="20" width="175" height="80"/><rect x="215" y="20" width="175" height="80"/><rect x="420" y="20" width="175" height="80"/>
+    <rect x="625" y="20" width="175" height="80"/><rect x="830" y="20" width="160" height="80"/>
+    <rect x="215" y="150" width="175" height="80"/><rect x="420" y="150" width="175" height="80"/><rect x="625" y="150" width="175" height="80"/>
+  </g>
+  <g text-anchor="middle" fill="#000">
+    <text x="97" y="55">Dataset</text><text x="97" y="78" font-size="14">4.728 foto, 5 tingkat</text>
+    <text x="302" y="55">Audit data</text><text x="302" y="78" font-size="14">duplikat, foto beruntun</text>
+    <text x="507" y="55">Split blok</text><text x="507" y="78" font-size="14">3.434 / 658 / 636</text>
+    <text x="712" y="55">Pra-pemrosesan</text><text x="712" y="78" font-size="14">224 px, augmentasi</text>
+    <text x="910" y="55">Model</text><text x="910" y="78" font-size="14">E0–E7</text>
+    <text x="302" y="185">Evaluasi</text><text x="302" y="208" font-size="14">3 seed, data uji</text>
+    <text x="507" y="185">Analisis</text><text x="507" y="208" font-size="14">kesalahan, Grad-CAM</text>
+    <text x="712" y="185">Demo web</text><text x="712" y="208" font-size="14">Gradio, CPU</text>
+  </g>
+  <g stroke="#000" stroke-width="1.3" fill="none" marker-end="url(#p)">
+    <path d="M185,60 L213,60"/><path d="M390,60 L418,60"/><path d="M595,60 L623,60"/><path d="M800,60 L828,60"/>
+    <path d="M910,100 L910,125 L302,125 L302,148"/><path d="M390,190 L418,190"/><path d="M595,190 L623,190"/>
+  </g>
+</svg>

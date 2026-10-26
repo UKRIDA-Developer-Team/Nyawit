@@ -1,0 +1,43 @@
+# Konfigurasi dasar. Setiap eksperimen mewarisi berkas ini lewat `_base_`
+# dan hanya menuliskan perbedaannya, sehingga perbandingan tetap terkontrol.
+experiment_name: base
+description: Konfigurasi dasar (tidak dijalankan langsung)
+seed: 42
+output_root: outputs/runs
+
+data:
+  root: data/raw/Dataset               # folder berisi Images/ dan Train_val_test_split/
+  metadata_csv: data/processed/metadata.csv
+  split_scheme: grouped                # grouped = split blok hasil audit (UTAMA); official = split resmi acak (pembanding E6/E7)
+  image_size: 224
+  num_workers: 2                        # Colab gratis menyediakan 2 vCPU
+  limit_per_split: null                 # hanya untuk uji asap (mis. 50)
+
+model:
+  backbone: efficientnet_b0             # pra-latih ImageNet (torchvision)
+  pretrained: true
+  head: ce                              # ce | corn
+  dropout: 0.2
+
+train:
+  epochs: 25
+  batch_size: 32
+  lr: 3.0e-4
+  weight_decay: 1.0e-2
+  warmup_epochs: 1
+  label_smoothing: 0.0
+  balanced_sampler: false
+  amp: true                             # mixed precision, hanya aktif di GPU CUDA
+  early_stopping_patience: 7
+  select_metric: macro_f1               # metrik validasi untuk memilih checkpoint (sama untuk semua eksperimen)
+  deterministic: true
+
+augment:
+  crop_scale: [0.6, 1.0]
+  hflip: true
+  vflip: true
+  rotation: 15
+  brightness: 0.2
+  contrast: 0.2
+  saturation: 0.0
+  hue: 0.0                              # sengaja 0: warna adalah isyarat utama kematangan (diuji di E4)

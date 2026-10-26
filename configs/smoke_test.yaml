@@ -1,0 +1,18 @@
+# Uji asap: memastikan pipeline berjalan ujung-ke-ujung dalam hitungan detik
+# di CPU dengan dataset sintetis (scripts/make_synthetic_dataset.py).
+_base_: e3_cnn_corn.yaml
+experiment_name: smoke_test
+description: Uji asap pipeline (data sintetis, bukan hasil eksperimen)
+output_root: outputs/smoke
+data:
+  root: data/synthetic/Dataset
+  metadata_csv: data/synthetic/metadata.csv
+  image_size: 64
+  num_workers: 0
+model:
+  backbone: resnet18
+  pretrained: false
+train:
+  epochs: 2
+  batch_size: 16
+  amp: false

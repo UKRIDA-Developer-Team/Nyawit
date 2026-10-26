@@ -1,0 +1,14 @@
+image_i,image_j,split_i,split_j,label_i,label_j,distance
+Immature119.jpg,Immature120.jpg,train,test,0,0,5
+Immature15.jpg,Immature16.jpg,test,train,0,0,5
+Immature324.jpg,Immature325.jpg,train,test,0,0,2
+Immature416.jpg,Immature417.jpg,val,train,0,0,4
+Immature52.jpg,Immature54.jpg,train,train,0,0,3
+Immature7.jpg,Immature8.jpg,test,val,0,0,2
+Immature94.jpg,Immature95.jpg,train,test,0,0,5
+PartiallyRipe494.jpg,PartiallyRipe495.jpg,test,train,1,1,4
+FullyRipe31.jpg,FullyRipe32.jpg,test,train,2,2,4
+FullyRipe44.jpg,FullyRipe45.jpg,val,train,2,2,3
+OverRipe217.jpg,OverRipe219.jpg,train,val,3,3,0
+Decayed192.jpg,Decayed193.jpg,train,train,4,4,5
+Decayed321.jpg,Decayed322.jpg,train,train,4,4,0

@@ -1,0 +1,26 @@
+{
+  "checkpoint": "/home/teo/Documents/University/imaging/K03_KematanganSawit/outputs/runs/e2_cnn_ce/seed42/best.pt",
+  "experiment": "e2_cnn_ce",
+  "backbone": "efficientnet_b0",
+  "head": "ce",
+  "input_size": "1x3x224x224",
+  "device": "cpu",
+  "torch_threads": 6,
+  "parameters": 4013953,
+  "checkpoint_mb": 16.337189,
+  "model_ms_median": 12.338856999122072,
+  "model_ms_p90": 12.750272999983281,
+  "fps_model": 81.04478397562687,
+  "preprocess_ms_median": 1.8607010024425108,
+  "warmup": 10,
+  "runs": 100,
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-7.2.4-3-cachyos-x86_64-with-glibc2.44",
+    "torch": "2.14.1+cpu",
+    "torchvision": "0.29.1+cpu",
+    "numpy": "2.5.2",
+    "device": "cpu",
+    "cpu_count": 12
+  }
+}

@@ -1,0 +1,8 @@
+# E7 - Pembanding kebocoran: E3 (CORN) dilatih & diuji pada split RESMI (acak).
+# Dibandingkan dengan E3 (split blok) untuk menjawab P2, dan dengan E6 untuk
+# memeriksa apakah urutan CE vs CORN sama pada kedua split.
+_base_: e3_cnn_corn.yaml
+experiment_name: e7_cnn_corn_official
+description: E3 pada split resmi (pembanding kebocoran)
+data:
+  split_scheme: official

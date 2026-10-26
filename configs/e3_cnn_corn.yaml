@@ -1,0 +1,7 @@
+# E3 - Metode utama: EfficientNet-B0 + loss ordinal CORN (split blok, lihat base.yaml).
+# Satu-satunya perbedaan dari E2 adalah kepala/loss (eksperimen terkontrol).
+_base_: base.yaml
+experiment_name: e3_cnn_corn
+description: EfficientNet-B0 pra-latih + loss ordinal CORN (metode utama)
+model:
+  head: corn

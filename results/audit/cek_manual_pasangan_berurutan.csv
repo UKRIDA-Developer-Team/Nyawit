@@ -1,0 +1,41 @@
+﻿image_a,image_b,split_resmi_a,split_resmi_b,split_blok_a,split_blok_b,sama_tandan,catatan
+PartiallyRipe327.jpg,PartiallyRipe328.jpg,train,train,train,train,unsure,
+Immature509.jpg,Immature510.jpg,train,train,val,val,no,
+Immature274.jpg,Immature275.jpg,train,test,train,train,yes,
+Immature126.jpg,Immature127.jpg,train,test,train,train,yes,
+PartiallyRipe186.jpg,PartiallyRipe187.jpg,train,test,test,test,unsure,dark pic and light pic
+FullyRipe124.jpg,FullyRipe125.jpg,test,train,test,test,unsure,
+OverRipe293.jpg,OverRipe294.jpg,test,train,val,val,no,
+FullyRipe1013.jpg,FullyRipe1014.jpg,train,train,train,train,unsure,hand blocking pic
+PartiallyRipe378.jpg,PartiallyRipe379.jpg,val,train,val,val,no,different floor leads me to believe so
+Decayed300.jpg,Decayed301.jpg,train,train,train,train,yes,
+Decayed185.jpg,Decayed186.jpg,train,train,test,test,unsure,probably
+Decayed35.jpg,Decayed36.jpg,test,val,train,train,yes,
+Immature396.jpg,Immature397.jpg,train,val,train,train,yes,
+Immature642.jpg,Immature643.jpg,test,train,train,train,no,
+OverRipe424.jpg,OverRipe425.jpg,train,train,train,train,unsure,fruit was smushed
+FullyRipe1190.jpg,FullyRipe1191.jpg,train,train,train,train,yes,
+OverRipe224.jpg,OverRipe225.jpg,test,train,train,train,yes,
+Decayed342.jpg,Decayed343.jpg,train,train,train,train,yes,
+FullyRipe202.jpg,FullyRipe203.jpg,train,train,train,train,yes,
+PartiallyRipe1079.jpg,PartiallyRipe1080.jpg,train,train,val,test,yes,
+Immature685.jpg,Immature686.jpg,train,train,train,train,unsure,
+PartiallyRipe15.jpg,PartiallyRipe16.jpg,train,train,train,train,yes,
+FullyRipe361.jpg,FullyRipe362.jpg,train,test,train,train,unsure,
+Immature308.jpg,Immature309.jpg,test,test,test,test,yes,
+PartiallyRipe1123.jpg,PartiallyRipe1124.jpg,train,test,train,train,yes,
+FullyRipe443.jpg,FullyRipe444.jpg,train,test,train,train,no,
+FullyRipe705.jpg,FullyRipe706.jpg,test,train,train,train,no,
+Immature421.jpg,Immature422.jpg,train,train,train,train,yes,
+PartiallyRipe1248.jpg,PartiallyRipe1249.jpg,test,val,train,train,yes,
+FullyRipe2.jpg,FullyRipe3.jpg,train,train,train,train,no,
+FullyRipe1159.jpg,FullyRipe1160.jpg,train,train,val,train,unsure,
+Immature105.jpg,Immature106.jpg,train,train,train,train,no,
+PartiallyRipe1389.jpg,PartiallyRipe1390.jpg,val,val,val,val,unsure,too zoomed
+OverRipe658.jpg,OverRipe659.jpg,train,train,train,train,no,
+FullyRipe1133.jpg,FullyRipe1134.jpg,train,train,train,train,yes,
+FullyRipe1063.jpg,FullyRipe1064.jpg,train,train,test,test,no,
+FullyRipe1455.jpg,FullyRipe1456.jpg,train,val,train,train,no,
+PartiallyRipe1018.jpg,PartiallyRipe1019.jpg,test,train,train,train,yes,
+FullyRipe54.jpg,FullyRipe55.jpg,train,train,test,test,unsure,saturation difference
+OverRipe276.jpg,OverRipe277.jpg,train,train,train,train,yes,

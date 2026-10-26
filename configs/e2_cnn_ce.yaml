@@ -1,0 +1,6 @@
+# E2 - Baseline deep learning: EfficientNet-B0 + cross-entropy (kelas nominal), split blok.
+_base_: base.yaml
+experiment_name: e2_cnn_ce
+description: EfficientNet-B0 pra-latih + cross-entropy (baseline)
+model:
+  head: ce

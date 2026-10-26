@@ -1,0 +1,8 @@
+# E5 - Iterasi setelah analisis kesalahan: E3 + sampler seimbang kelas.
+# Motivasi: kelas Busuk (411 gambar) dan Terlalu Matang (665) jauh lebih sedikit
+# daripada Matang Penuh (1.489); recall kelas kecil diperkirakan rendah.
+_base_: e3_cnn_corn.yaml
+experiment_name: e5_cnn_corn_balanced
+description: E3 + WeightedRandomSampler seimbang kelas (iterasi)
+train:
+  balanced_sampler: true

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Proposal Proyek Akhir Visi Komputer - Kelompok 3</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  body { font-family: "Liberation Serif", "Times New Roman", serif; font-size: 10.5pt; line-height: 1.32; color: #000; margin: 0; }
+  .kepala { text-align: center; margin-bottom: 14px; }
+  .kepala .t1 { font-size: 16pt; font-weight: bold; }
+  .kepala .t2 { font-size: 12.5pt; font-weight: bold; margin-top: 3px; }
+  .kepala .judul { font-size: 12.5pt; font-weight: bold; margin-top: 12px; }
+  .kepala table.nama { margin: 10px auto 0; border: none; width: auto; font-size: 11pt; }
+  .kepala table.nama td { border: none; padding: 1px 14px; text-align: left; }
+  .kolom { column-count: 2; column-gap: 7mm; }
+  h2 { font-size: 13pt; font-weight: normal; color: #2f5d9e; margin: 12px 0 6px; break-after: avoid; }
+  h3 { font-size: 10.5pt; font-weight: bold; color: #000; margin: 9px 0 4px; break-after: avoid; break-inside: avoid; }
+  p { margin: 0 0 6px; text-align: justify; hyphens: auto; }
+  p.ind { text-indent: 1.2em; }
+  figure { margin: 6px 0 10px; break-inside: avoid; text-align: center; }
+  figure img { width: 100%; }
+  figure.lebar { column-span: all; }
+  figcaption { font-size: 9pt; text-align: center; margin-top: 3px; }
+  .tcap { font-size: 9pt; margin: 8px 0 3px; text-align: center; break-after: avoid; }
+  table.data { width: 100%; border-collapse: collapse; font-size: 9pt; margin-bottom: 8px; break-inside: avoid; }
+  table.data th, table.data td { border: 0.6px solid #000; padding: 2px 4px; text-align: left; vertical-align: top; }
+  .rumus { text-align: center; font-style: italic; margin: 4px 0 6px; }
+  .ref { font-size: 9pt; padding-left: 18px; }
+  .ref li { text-align: left; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<div class="kepala">
+  <div class="t1">Computer Vision Final Project: Technical Report</div>
+  <div class="t2">Proyek Akhir Visi Komputer: Laporan Teknis</div>
+  <div class="judul">Klasifikasi Ordinal Tingkat Kematangan Tandan Buah Segar Kelapa Sawit<br>dari Foto Lapangan Menggunakan EfficientNet-B0</div>
+  <table class="nama">
+    <tr><td>Yedija Teofilus Yonatan</td><td>412024011</td></tr>
+    <tr><td>Juanito Dante</td><td>412024001</td></tr>
+    <tr><td>Steven Iwan</td><td>412024010</td></tr>
+  </table>
+</div>
+
+<div class="kolom">
+
+<h2>Abstract</h2>
+<p><b>Abstrak</b>—Penilaian tingkat kematangan tandan buah segar (TBS) kelapa sawit di pabrik masih dilakukan secara visual oleh petugas sortasi, sehingga hasilnya dapat berbeda antarpetugas. Proyek ini membangun model klasifikasi lima tingkat kematangan (mentah, setengah matang, matang penuh, terlalu matang, dan busuk) dari satu foto. Karena tingkat kematangan bersifat berurutan, kami membandingkan EfficientNet-B0 pra-latih yang dilatih dengan loss <i>cross-entropy</i> (CE) dan dengan loss ordinal CORN. Data yang digunakan adalah dataset publik berisi 4.728 foto lapangan dari Kalimantan Tengah. Audit data menunjukkan bahwa foto bernomor berurutan sering memotret tandan yang sama, dan 92% foto uji pada pembagian data resmi memiliki foto tetangga di data latih. Karena itu, evaluasi utama memakai split blok yang menjaga foto berurutan tetap dalam satu bagian. Pada split blok, kedua model mencapai macro-F1 sekitar 0,91, jauh di atas baseline warna (0,66), tetapi CORN tidak lebih baik daripada CE (macro-F1 0,905 dibanding 0,914; MAE 0,121 dibanding 0,111 tingkat). Pada split resmi, skor kedua model tampak sekitar 5 poin lebih tinggi. Model dijalankan sebagai demo web dengan waktu inferensi sekitar 12 ms per foto pada CPU.</p>
+
+<h2>1&nbsp;&nbsp;&nbsp;1. Introduction / Pendahuluan</h2>
+<p>Indonesia adalah produsen kelapa sawit terbesar di dunia dengan luas areal 16,83 juta hektare, dan menguasai lebih dari 55% ekspor minyak sawit dunia [1]. Mutu tandan buah segar (TBS) yang dijual pekebun ditentukan terutama oleh tingkat kematangannya. Tandan yang dipanen terlalu dini menghasilkan minyak lebih sedikit, sedangkan tandan yang terlambat dipanen menaikkan kadar asam lemak bebas [2]. Di pabrik kelapa sawit, petugas sortasi memeriksa sebagian tandan secara visual lalu memotong berat kiriman bila menemukan tandan mentah [2]. Penilaian manual seperti ini bersifat subjektif dan sering memicu sengketa antara pekebun dan pabrik [3].</p>
+<p class="ind">Pengolahan citra tradisional pernah dipakai untuk masalah ini, misalnya dengan rata-rata nilai RGB, tetapi metode tersebut membutuhkan pencahayaan yang terkontrol [3]. Foto di kebun diambil dengan ponsel yang berbeda, di bawah terik atau teduh, dan dengan latar yang beragam. Kematangan juga tidak hanya terlihat dari warna, tetapi juga dari tekstur buah, buah yang mulai rontok, dan kekeringan tandan (Gambar 1). <i>Convolutional neural network</i> (CNN) dapat mempelajari isyarat tersebut langsung dari contoh foto [4], dan dengan <i>transfer learning</i> dari ImageNet [5], CNN dapat dilatih dengan beberapa ribu foto saja.</p>
+<p class="ind">Kelima tingkat kematangan bersifat berurutan. Salah menilai tandan mentah sebagai setengah matang lebih ringan akibatnya daripada menilainya sebagai terlalu matang. Dataset yang kami gunakan memang disusun sebagai data ordinal [6], tetapi loss <i>cross-entropy</i> memperlakukan semua kesalahan sama berat. Karena itu kami juga menguji CORN [7], yaitu metode regresi ordinal untuk jaringan saraf.</p>
+<p class="ind">Tujuan proyek ini adalah: (1) membangun model yang menerima satu foto RGB tandan dan mengeluarkan tingkat kematangan 0–4; (2) membandingkan CE dan CORN dengan metrik yang memperhitungkan jarak kesalahan; (3) mengevaluasi model dengan pembagian data yang tidak bocor; dan (4) menyajikan model dalam demo web. Batasannya, data hanya berasal dari satu wilayah dan setiap foto berisi satu tandan, sehingga hasilnya belum berlaku untuk foto tumpukan tandan di pabrik.</p>
+
+<figure class="lebar">
+  <img src="gambar/kelas_kematangan_bw.png" alt="">
+  <figcaption><b>Gambar 1.</b> Contoh foto untuk setiap tingkat kematangan dalam dataset [6].</figcaption>
+</figure>
+
+<div style="column-span: all">
+<h2>2&nbsp;&nbsp;&nbsp;2. Methodology / Metodologi</h2>
+<p>Alur kerja proyek ditunjukkan pada Gambar 2. Semua pengaturan disimpan dalam berkas konfigurasi YAML di repositori proyek agar eksperimen dapat diulang.</p>
+</div>
+
+<figure class="lebar">
+  <img src="gambar/alur_bw.svg" alt="" style="width:88%">
+  <figcaption><b>Gambar 2.</b> Alur kerja proyek, dari dataset sampai demo web.</figcaption>
+</figure>
+
+<h3>2.1&nbsp;&nbsp;&nbsp;A. Data Strategy / Strategi Data</h3>
+<p>Dataset yang dipakai adalah <i>An Ordinal Dataset for Ripeness Level Classification in Oil Palm Fruit Quality Grading</i> dari Mendeley Data [6] dengan lisensi CC BY 4.0. Dataset ini berisi 4.728 foto JPG berukuran 256×256 piksel yang diambil di perkebunan Kalimantan Tengah dengan berbagai ponsel, pencahayaan, dan latar. Penyusun dataset juga menyediakan pembagian data resmi secara acak (Tabel 1).</p>
+
+
+<div class="tcap"><b>Tabel 1.</b> Jumlah foto per kelas (latih / validasi / uji).</div>
+<table class="data">
+  <tr><th>Kelas</th><th>Total</th><th>Split resmi</th><th>Split blok</th></tr>
+  <tr><td>Mentah</td><td>758</td><td>530 / 113 / 115</td><td>580 / 98 / 80</td></tr>
+  <tr><td>Setengah Matang</td><td>1.405</td><td>982 / 210 / 213</td><td>1.025 / 180 / 200</td></tr>
+  <tr><td>Matang Penuh</td><td>1.489</td><td>1.042 / 222 / 225</td><td>1.069 / 220 / 200</td></tr>
+  <tr><td>Terlalu Matang</td><td>665</td><td>465 / 98 / 102</td><td>460 / 100 / 105</td></tr>
+  <tr><td>Busuk</td><td>411</td><td>287 / 61 / 63</td><td>300 / 60 / 51</td></tr>
+  <tr><td>Total</td><td>4.728</td><td>3.306 / 704 / 718</td><td>3.434 / 658 / 636</td></tr>
+</table>
+
+<p><b>Audit data.</b> Sebelum pelatihan, kami memeriksa duplikat dengan MD5 dan dHash, dan menemukan 1 pasang berkas identik serta 13 pasang foto yang hampir identik. Kami juga menemukan bahwa foto dengan nomor berkas berurutan sering memotret tandan yang sama dari sudut yang sedikit berbeda (Gambar 3). Dari 40 pasangan berurutan yang kami periksa secara manual, 62% dari pasangan yang dapat diputuskan adalah tandan yang sama. Pada split resmi, 92% foto uji memiliki foto bernomor ±1 di data latih, sehingga model dapat diuji dengan tandan yang sudah pernah dilihatnya. Kebocoran data seperti ini membuat hasil terlihat lebih baik daripada sebenarnya [8].</p>
+
+<figure>
+  <img src="gambar/contoh_kebocoran_bw.png" alt="">
+  <figcaption><b>Gambar 3.</b> Dua foto tandan yang sama dengan nomor berkas berurutan.</figcaption>
+</figure>
+
+<p><b>Split blok.</b> Untuk mengatasi kebocoran tersebut, nomor berkas setiap kelas dibagi menjadi blok berisi 20 foto berurutan. Blok-blok ini dibagi ke data latih, validasi, dan uji dengan <i>StratifiedGroupKFold</i> (seed 42) sehingga satu blok selalu berada di bagian yang sama. Hasilnya 3.434 / 658 / 636 foto, dan hanya 8,3% foto uji yang masih bertetangga dengan data latih, yaitu foto di batas blok. Split blok dipakai sebagai split utama, sedangkan split resmi hanya dipakai sebagai pembanding. Pembagian ini disimpan sebagai berkas CSV karena hasil <i>StratifiedGroupKFold</i> dapat berbeda antarversi scikit-learn.</p>
+
+<p><b>Pra-pemrosesan dan augmentasi.</b> Saat pelatihan, foto dipotong acak dengan <i>RandomResizedCrop</i> 224×224 (skala 0,6–1,0), dibalik secara horizontal dan vertikal, diputar ±15°, serta diubah kecerahan dan kontrasnya ±0,2. <i>Hue</i> dan saturasi tidak diubah karena warna adalah isyarat utama kematangan; pengaruhnya diuji terpisah (E4). Saat evaluasi, foto diubah ukurannya ke 256 lalu dipotong di tengah menjadi 224×224. Semua foto dinormalisasi dengan rerata dan simpangan baku ImageNet.</p>
+
+<p><b>Ketidakseimbangan kelas.</b> Kelas terbesar (Matang Penuh) berjumlah 3,6 kali kelas terkecil (Busuk). Karena itu kami memakai macro-F1 sebagai metrik utama dan untuk memilih checkpoint, melaporkan recall per kelas, dan menguji <i>WeightedRandomSampler</i> yang menyeimbangkan kelas (E5).</p>
+
+<h3>2.2&nbsp;&nbsp;&nbsp;B. Model Architecture / Arsitektur Model</h3>
+<p><b>Baseline.</b> Ada dua baseline klasik: E0 selalu menebak kelas terbanyak, dan E1 memakai 40 fitur histogram warna HSV dengan regresi logistik. Baseline ketiga adalah E2, yaitu EfficientNet-B0 dengan <i>cross-entropy</i>.</p>
+<p><b>Backbone.</b> Kami memakai EfficientNet-B0 [9] dengan bobot pra-latih ImageNet [5] dari torchvision. Lapisan klasifikasinya diganti dengan <i>Dropout</i>(0,2) dan <i>Linear</i>(1280 → <i>K</i>), sehingga model memiliki sekitar 4,0 juta parameter. Seluruh lapisan dilatih ulang (<i>full fine-tuning</i>).</p>
+<p><b>Kepala CE dan CORN.</b> Kepala CE (E2) menghasilkan <i>K</i> = 5 logit dan dilatih dengan <i>cross-entropy</i>. Kepala CORN (E3) menghasilkan <i>K</i> − 1 = 4 logit. Logit ke-<i>k</i> memodelkan peluang bersyarat <i>P</i>(<i>y</i> &gt; <i>k</i> | <i>y</i> &gt; <i>k</i> − 1) dan dilatih dengan <i>binary cross-entropy</i> hanya pada sampel dengan <i>y</i> ≥ <i>k</i> [7]. Peluang kumulatifnya dihitung sebagai</p>
+<p class="rumus">P(y &gt; k) = Π<sub>j ≤ k</sub> σ(z<sub>j</sub>)</p>
+<p>dan tingkat yang diprediksi adalah banyaknya <i>k</i> dengan <i>P</i>(<i>y</i> &gt; <i>k</i>) &gt; 0,5. Kedua model memakai backbone, data, dan pengaturan pelatihan yang sama (Tabel 2); yang berbeda hanya kepala dan loss-nya.</p>
+
+<div class="tcap"><b>Tabel 2.</b> Pengaturan pelatihan.</div>
+<table class="data">
+  <tr><th>Parameter</th><th>Nilai</th></tr>
+  <tr><td>Optimizer</td><td>AdamW [10], lr 3·10<sup>−4</sup>, <i>weight decay</i> 10<sup>−2</sup></td></tr>
+  <tr><td>Jadwal lr</td><td><i>warmup</i> 1 epoch, lalu <i>cosine decay</i></td></tr>
+  <tr><td>Epoch / batch</td><td>maks. 25, <i>early stopping</i> 7 epoch; batch 32</td></tr>
+  <tr><td>Pemilihan checkpoint</td><td>macro-F1 validasi terbaik</td></tr>
+  <tr><td>Seed</td><td>42, 43, 44</td></tr>
+</table>
+
+<p><b>Eksperimen.</b> Tabel 3 merangkum eksperimen yang dijalankan. Setiap perbandingan hanya mengubah satu faktor, dan setiap eksperimen CNN diulang dengan tiga seed.</p>
+
+<div class="tcap"><b>Tabel 3.</b> Daftar eksperimen.</div>
+<table class="data">
+  <tr><th>ID</th><th>Perlakuan</th><th>Split</th></tr>
+  <tr><td>E0, E1</td><td>kelas mayoritas; HSV + regresi logistik</td><td>blok, resmi</td></tr>
+  <tr><td>E2</td><td>EfficientNet-B0 + CE</td><td>blok</td></tr>
+  <tr><td>E3</td><td>EfficientNet-B0 + CORN</td><td>blok</td></tr>
+  <tr><td>E4</td><td>E3 + augmentasi <i>hue</i> 0,1 dan saturasi 0,2</td><td>blok</td></tr>
+  <tr><td>E5</td><td>E3 + sampler seimbang kelas</td><td>blok</td></tr>
+  <tr><td>E6, E7</td><td>E2 dan E3</td><td>resmi</td></tr>
+</table>
+
+<p><b>Evaluasi.</b> Data uji hanya dievaluasi sekali per run, setelah checkpoint dipilih dari data validasi. Metrik yang dipakai adalah akurasi, macro-F1, recall per kelas, dan <i>confusion matrix</i>, ditambah tiga metrik ordinal: MAE (rata-rata selisih tingkat), proporsi kesalahan berat (meleset ≥ 2 tingkat), dan <i>quadratic weighted kappa</i> [11]. Hasil dilaporkan sebagai rerata ± simpangan baku dari tiga seed. Untuk analisis kesalahan, kami memakai Grad-CAM [12] untuk melihat bagian foto yang paling memengaruhi prediksi.</p>
+
+<h3>2.3&nbsp;&nbsp;&nbsp;C. Deployment &amp; Environment / Lingkungan &amp; Penerapan</h3>
+<p>Pelatihan dilakukan di Google Colab dengan GPU NVIDIA Tesla T4 (16 GB), PyTorch 2.11, dan CUDA 13.0. Satu run memakan waktu sekitar 7–15 menit, dengan total 18 run CNN. Baseline klasik, analisis kesalahan, dan demo dijalankan di laptop dengan CPU AMD Ryzen 5 5600.</p>
+<p class="ind">Model dipakai melalui aplikasi web Gradio yang berjalan di laptop. Pengguna mengunggah foto lewat peramban. Server menjalankan pra-pemrosesan yang sama dengan data validasi, memuat checkpoint model (±16 MB), lalu menampilkan tingkat kematangan, peluang setiap tingkat, peta Grad-CAM, dan peringatan bila keyakinan model di bawah 0,9. Ambang ini dipilih dari data validasi. Waktu inferensi diukur dengan batch 1 dan 100 iterasi, dan hasilnya sekitar 12 ms per foto pada CPU. Sebagai cadangan bila antarmuka web bermasalah, prediksi juga dapat dijalankan melalui skrip baris perintah.</p>
+
+<h2>References / Referensi</h2>
+<ol class="ref">
+  <li>Pusat Data dan Sistem Informasi Pertanian, <i>Outlook Kelapa Sawit 2024</i>. Jakarta: Kementerian Pertanian RI, 2024.</li>
+  <li>L. S. Woittiez <i>et al.</i>, <i>Smallholder Oil Palm Handbook, Module 2: Harvesting, Grading, Transport</i>, 3rd ed. Wageningen University &amp; SNV, 2016.</li>
+  <li>M. S. M. Alfatni <i>et al.</i>, "Oil palm fruit bunch grading system using red, green and blue digital number," <i>Journal of Applied Sciences</i>, vol. 8, no. 8, pp. 1444–1452, 2008.</li>
+  <li>Suharjito, G. N. Elwirehardja, and J. S. Prayoga, "Oil palm fresh fruit bunch ripeness classification on mobile devices using deep learning approaches," <i>Computers and Electronics in Agriculture</i>, vol. 188, 106359, 2021.</li>
+  <li>J. Deng <i>et al.</i>, "ImageNet: A large-scale hierarchical image database," in <i>Proc. CVPR</i>, 2009, pp. 248–255.</li>
+  <li>I. M. Kamal <i>et al.</i>, "An ordinal dataset for ripeness level classification in oil palm fruit quality grading," Mendeley Data, v1, 2024, doi: 10.17632/424y96m6sw.1.</li>
+  <li>X. Shi, W. Cao, and S. Raschka, "Deep neural networks for rank-consistent ordinal regression based on conditional probabilities," <i>Pattern Analysis and Applications</i>, vol. 26, no. 3, pp. 941–955, 2023.</li>
+  <li>S. Kapoor and A. Narayanan, "Leakage and the reproducibility crisis in machine-learning-based science," <i>Patterns</i>, vol. 4, no. 9, 100804, 2023.</li>
+  <li>M. Tan and Q. V. Le, "EfficientNet: Rethinking model scaling for convolutional neural networks," in <i>Proc. ICML</i>, 2019, pp. 6105–6114.</li>
+  <li>I. Loshchilov and F. Hutter, "Decoupled weight decay regularization," in <i>Proc. ICLR</i>, 2019.</li>
+  <li>J. Cohen, "Weighted kappa: Nominal scale agreement provision for scaled disagreement or partial credit," <i>Psychological Bulletin</i>, vol. 70, no. 4, pp. 213–220, 1968.</li>
+  <li>R. R. Selvaraju <i>et al.</i>, "Grad-CAM: Visual explanations from deep networks via gradient-based localization," in <i>Proc. ICCV</i>, 2017, pp. 618–626.</li>
+</ol>
+
+</div>
+</body>
+</html>

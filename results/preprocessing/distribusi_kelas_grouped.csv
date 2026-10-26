@@ -1,0 +1,7 @@
+,train,val,test,total
+0 - Mentah,580,98,80,758
+1 - Setengah Matang,1025,180,200,1405
+2 - Matang Penuh,1069,220,200,1489
+3 - Terlalu Matang,460,100,105,665
+4 - Busuk,300,60,51,411
+Total,3434,658,636,4728

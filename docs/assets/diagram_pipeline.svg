@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="panah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#33475b"/>
+    </marker>
+    <style>
+      .kotak { fill: #f4f7fb; stroke: #33475b; stroke-width: 1.4; rx: 8; }
+      .utama { fill: #e3f0e8; stroke: #2f7a4f; stroke-width: 2; }
+      .data { fill: #fdf3e1; stroke: #b9822c; }
+      .judul { font-weight: bold; font-size: 14px; fill: #12263a; }
+      .ket { fill: #33475b; font-size: 12px; }
+      .garis { stroke: #33475b; stroke-width: 1.4; fill: none; marker-end: url(#panah); }
+    </style>
+  </defs>
+
+  <text x="500" y="26" text-anchor="middle" class="judul" font-size="17">Pipeline proyek: klasifikasi ordinal kematangan buah sawit</text>
+
+  <!-- Baris 1: data -->
+  <rect x="20" y="50" width="185" height="92" class="kotak data"/>
+  <text x="112" y="74" text-anchor="middle" class="judul">Dataset.zip</text>
+  <text x="112" y="94" text-anchor="middle" class="ket">Mendeley, CC BY 4.0</text>
+  <text x="112" y="111" text-anchor="middle" class="ket">4.728 foto 256×256, 5 tingkat</text>
+  <text x="112" y="128" text-anchor="middle" class="ket">SHA-256 diverifikasi</text>
+
+  <rect x="245" y="50" width="185" height="92" class="kotak data"/>
+  <text x="337" y="74" text-anchor="middle" class="judul">Metadata</text>
+  <text x="337" y="94" text-anchor="middle" class="ket">label, split resmi,</text>
+  <text x="337" y="111" text-anchor="middle" class="ket">ukuran, MD5, dHash</text>
+  <text x="337" y="128" text-anchor="middle" class="ket">prepare_data.py</text>
+
+  <rect x="470" y="50" width="220" height="92" class="kotak data"/>
+  <text x="580" y="74" text-anchor="middle" class="judul">Audit kebocoran</text>
+  <text x="580" y="94" text-anchor="middle" class="ket">dHash + urutan nomor berkas</text>
+  <text x="580" y="111" text-anchor="middle" class="ket">92% test resmi punya</text>
+  <text x="580" y="128" text-anchor="middle" class="ket">tetangga ±1 di train</text>
+
+  <rect x="730" y="50" width="250" height="92" class="kotak data"/>
+  <text x="855" y="74" text-anchor="middle" class="judul">Split blok (utama)</text>
+  <text x="855" y="94" text-anchor="middle" class="ket">blok 20 nomor: 3.434 / 658 / 636</text>
+  <text x="855" y="111" text-anchor="middle" class="ket">split resmi = pembanding (E6, E7)</text>
+  <text x="855" y="128" text-anchor="middle" class="ket">test dipakai sekali per run</text>
+
+  <path d="M205,96 L243,96" class="garis"/>
+  <path d="M430,96 L468,96" class="garis"/>
+  <path d="M690,96 L728,96" class="garis"/>
+
+  <!-- Baris 2: model -->
+  <rect x="20" y="190" width="220" height="104" class="kotak"/>
+  <text x="130" y="214" text-anchor="middle" class="judul">Baseline klasik</text>
+  <text x="130" y="236" text-anchor="middle" class="ket">E0 kelas mayoritas</text>
+  <text x="130" y="254" text-anchor="middle" class="ket">E1 histogram HSV</text>
+  <text x="130" y="272" text-anchor="middle" class="ket">+ regresi logistik</text>
+
+  <rect x="280" y="190" width="300" height="104" class="kotak"/>
+  <text x="430" y="214" text-anchor="middle" class="judul">Pra-pemrosesan &amp; augmentasi</text>
+  <text x="430" y="236" text-anchor="middle" class="ket">RandomResizedCrop 224, flip, rotasi ±15°,</text>
+  <text x="430" y="254" text-anchor="middle" class="ket">kecerahan/kontras ±0,2; hue = 0 (diuji E4)</text>
+  <text x="430" y="272" text-anchor="middle" class="ket">normalisasi ImageNet</text>
+
+  <rect x="620" y="190" width="360" height="104" class="kotak utama"/>
+  <text x="800" y="214" text-anchor="middle" class="judul">EfficientNet-B0 pra-latih ImageNet</text>
+  <text x="800" y="238" text-anchor="middle" class="ket">E2: kepala 5 logit + cross-entropy (baseline)</text>
+  <text x="800" y="258" text-anchor="middle" class="ket" font-weight="bold">E3: kepala 4 logit + loss ordinal CORN (utama)</text>
+  <text x="800" y="278" text-anchor="middle" class="ket">AdamW, cosine LR, 25 epoch, early stopping</text>
+
+  <path d="M855,142 L855,165 L130,165 L130,188" class="garis"/>
+  <path d="M430,165 L430,188" class="garis" />
+  <path d="M580,242 L618,242" class="garis"/>
+
+  <!-- Baris 3: evaluasi -->
+  <rect x="20" y="335" width="300" height="80" class="kotak"/>
+  <text x="170" y="359" text-anchor="middle" class="judul">Evaluasi (3 seed)</text>
+  <text x="170" y="380" text-anchor="middle" class="ket">akurasi, macro-F1, per kelas, confusion</text>
+  <text x="170" y="398" text-anchor="middle" class="ket">MAE, kesalahan ≥2 tingkat, QWK</text>
+
+  <rect x="360" y="335" width="290" height="80" class="kotak"/>
+  <text x="505" y="359" text-anchor="middle" class="judul">Eksperimen terkontrol</text>
+  <text x="505" y="380" text-anchor="middle" class="ket">E2 vs E3 (loss) · E3 vs E4 (hue)</text>
+  <text x="505" y="398" text-anchor="middle" class="ket">E5 sampler seimbang · E6/E7 split resmi</text>
+
+  <rect x="690" y="335" width="290" height="80" class="kotak"/>
+  <text x="835" y="359" text-anchor="middle" class="judul">Analisis &amp; demo</text>
+  <text x="835" y="380" text-anchor="middle" class="ket">galeri kesalahan + Grad-CAM</text>
+  <text x="835" y="398" text-anchor="middle" class="ket">Gradio + CLI cadangan, latensi CPU/GPU</text>
+
+  <path d="M800,294 L800,315 L170,315 L170,333" class="garis"/>
+  <path d="M130,294 L130,315" style="stroke:#33475b;stroke-width:1.4;fill:none"/>
+  <path d="M320,375 L358,375" class="garis"/>
+  <path d="M650,375 L688,375" class="garis"/>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 330" font-family="Liberation Sans, Arial, sans-serif">
+  <defs>
+    <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#33475b"/></marker>
+    <style>
+      .k { fill:#f4f7fb; stroke:#33475b; stroke-width:1.5; }
+      .t { font-weight:bold; font-size:15px; fill:#12263a; }
+      .s { font-size:12.5px; fill:#33475b; }
+      .m { font-size:12.5px; fill:#9b2c22; }
+      .a { stroke:#33475b; stroke-width:1.6; fill:none; marker-end:url(#p); }
+    </style>
+  </defs>
+  <text x="500" y="24" text-anchor="middle" font-size="17" font-weight="bold" fill="#12263a">Perjalanan TBS dari kebun ke pabrik, dan di mana kerugian terjadi</text>
+
+  <rect x="10" y="45" width="175" height="105" rx="10" class="k"/>
+  <text x="97" y="72" text-anchor="middle" class="t">1. Kebun pekebun</text>
+  <text x="97" y="95" text-anchor="middle" class="s">pemanen memutuskan</text>
+  <text x="97" y="112" text-anchor="middle" class="s">"sudah matang?"</text>
+  <text x="97" y="129" text-anchor="middle" class="s">hanya dengan mata</text>
+
+  <rect x="210" y="45" width="175" height="105" rx="10" class="k"/>
+  <text x="297" y="72" text-anchor="middle" class="t">2. Angkut ke PKS</text>
+  <text x="297" y="95" text-anchor="middle" class="s">satu truk ± 8 ton TBS,</text>
+  <text x="297" y="112" text-anchor="middle" class="s">harus diolah &lt; 24 jam</text>
+  <text x="297" y="129" text-anchor="middle" class="s">agar mutu minyak terjaga</text>
+
+  <rect x="410" y="45" width="175" height="105" rx="10" class="k" style="stroke:#c0392b;stroke-width:2.5"/>
+  <text x="497" y="72" text-anchor="middle" class="t">3. Sortasi di PKS</text>
+  <text x="497" y="95" text-anchor="middle" class="s">petugas memeriksa</text>
+  <text x="497" y="112" text-anchor="middle" class="s">sampel ± 10% tandan</text>
+  <text x="497" y="129" text-anchor="middle" class="s">secara visual</text>
+
+  <rect x="610" y="45" width="175" height="105" rx="10" class="k"/>
+  <text x="697" y="72" text-anchor="middle" class="t">4. Potongan berat</text>
+  <text x="697" y="95" text-anchor="middle" class="s">contoh nyata: 156 kg</text>
+  <text x="697" y="112" text-anchor="middle" class="s">(1,85%) dari 8.430 kg,</text>
+  <text x="697" y="129" text-anchor="middle" class="s">84 kg karena buah mentah</text>
+
+  <rect x="810" y="45" width="180" height="105" rx="10" class="k"/>
+  <text x="900" y="72" text-anchor="middle" class="t">5. Uang pekebun</text>
+  <text x="900" y="95" text-anchor="middle" class="s">contoh tersebut:</text>
+  <text x="900" y="112" text-anchor="middle" class="s">Rp 249.600 hilang</text>
+  <text x="900" y="129" text-anchor="middle" class="s">dari satu truk</text>
+
+  <path d="M185,97 L208,97" class="a"/><path d="M385,97 L408,97" class="a"/>
+  <path d="M585,97 L608,97" class="a"/><path d="M785,97 L808,97" class="a"/>
+
+  <rect x="10" y="172" width="575" height="98" rx="10" fill="#fdecea" stroke="#c0392b" stroke-width="1.3"/>
+  <text x="25" y="196" class="t" fill="#9b2c22">Masalahnya</text>
+  <text x="25" y="218" class="m">• Penilaian visual bersifat subjektif dan dapat berbeda antarpetugas; sering memicu sengketa.</text>
+  <text x="25" y="237" class="m">• Panen terlalu dini: rendemen minyak turun. Terlambat: asam lemak bebas (ALB) naik.</text>
+  <text x="25" y="256" class="m">• Pekebun baru tahu mutunya di pabrik, saat sudah terlambat untuk diperbaiki.</text>
+
+  <rect x="610" y="172" width="380" height="98" rx="10" fill="#e3f0e8" stroke="#2f7a4f" stroke-width="1.6"/>
+  <text x="625" y="196" class="t" fill="#1d5c37">Peran MataSawit</text>
+  <text x="625" y="218" class="s">• Cek kematangan dari foto ponsel di kebun,</text>
+  <text x="625" y="237" class="s">  sebelum panen dan sebelum dijual.</text>
+  <text x="625" y="256" class="s">• Pendapat kedua yang konsisten saat sortasi.</text>
+  <text x="500" y="298" text-anchor="middle" font-size="11.5" fill="#4a5d70">Angka truk, sampel 10%, dan potongan diambil dari contoh formulir sortasi PKS dalam Woittiez dkk. (2016), pada harga TBS Rp 1,6 juta/ton saat itu.</text>
+  <text x="500" y="316" text-anchor="middle" font-size="11.5" fill="#4a5d70">Batas waktu 24 jam dan dampak ALB juga dari sumber yang sama.</text>
+</svg>

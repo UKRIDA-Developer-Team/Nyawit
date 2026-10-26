@@ -1,0 +1,12 @@
+label,pred,jumlah,label_nama,prediksi_nama,selisih_tingkat
+2,1,16,Matang Penuh,Setengah Matang,1
+3,2,8,Terlalu Matang,Matang Penuh,1
+0,1,7,Mentah,Setengah Matang,1
+1,2,7,Setengah Matang,Matang Penuh,1
+2,3,5,Matang Penuh,Terlalu Matang,1
+3,4,5,Terlalu Matang,Busuk,1
+1,0,3,Setengah Matang,Mentah,1
+1,3,3,Setengah Matang,Terlalu Matang,2
+3,1,3,Terlalu Matang,Setengah Matang,2
+2,0,2,Matang Penuh,Mentah,2
+1,4,1,Setengah Matang,Busuk,3

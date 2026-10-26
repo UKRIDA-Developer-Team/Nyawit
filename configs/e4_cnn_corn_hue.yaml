@@ -1,0 +1,8 @@
+# E4 - Eksperimen augmentasi: E3 + hue jitter.
+# Hipotesis: menggeser hue merusak isyarat warna kematangan sehingga MAE naik.
+_base_: e3_cnn_corn.yaml
+experiment_name: e4_cnn_corn_hue
+description: E3 + augmentasi hue jitter 0.1 (uji pengaruh augmentasi warna)
+augment:
+  hue: 0.1
+  saturation: 0.2

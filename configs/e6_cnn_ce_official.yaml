@@ -1,0 +1,8 @@
+# E6 - Pembanding kebocoran: E2 (cross-entropy) dilatih & diuji pada split RESMI (acak).
+# Audit menemukan 92% gambar test resmi punya tetangga bernomor berurutan di train,
+# sehingga skor pada split ini diperkirakan terlalu optimistis dibanding E2 (split blok).
+_base_: e2_cnn_ce.yaml
+experiment_name: e6_cnn_ce_official
+description: E2 pada split resmi (pembanding kebocoran)
+data:
+  split_scheme: official

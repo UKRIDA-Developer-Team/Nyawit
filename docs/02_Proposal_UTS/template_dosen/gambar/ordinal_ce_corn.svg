@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 366" font-family="Liberation Sans, Arial, sans-serif">
+  <defs>
+    <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#33475b"/></marker>
+    <style>
+      .t { font-weight:bold; font-size:15px; fill:#12263a; }
+      .s { font-size:12.5px; fill:#33475b; }
+      .c { font-size:12px; fill:#fff; font-weight:bold; }
+    </style>
+  </defs>
+  <!-- Panel CE -->
+  <rect x="8" y="8" width="984" height="138" rx="12" fill="#f4f7fb" stroke="#33475b"/>
+  <text x="24" y="34" class="t">Cara biasa (cross-entropy): lima "laci" yang tidak berurutan</text>
+  <g>
+    <rect x="24" y="50" width="150" height="40" rx="7" fill="#3b3355"/><text x="99" y="75" text-anchor="middle" class="c">Mentah</text>
+    <rect x="184" y="50" width="150" height="40" rx="7" fill="#a5402d"/><text x="259" y="75" text-anchor="middle" class="c">Setengah Matang</text>
+    <rect x="344" y="50" width="150" height="40" rx="7" fill="#d9731e"/><text x="419" y="75" text-anchor="middle" class="c">Matang Penuh</text>
+    <rect x="504" y="50" width="150" height="40" rx="7" fill="#8a6a3a"/><text x="579" y="75" text-anchor="middle" class="c">Terlalu Matang</text>
+    <rect x="664" y="50" width="150" height="40" rx="7" fill="#5b5146"/><text x="739" y="75" text-anchor="middle" class="c">Busuk</text>
+  </g>
+  <text x="830" y="66" class="s">Model memilih satu laci.</text>
+  <text x="830" y="84" class="s">Urutan tidak dikenal.</text>
+  <text x="24" y="116" class="s" fill="#9b2c22">Akibatnya: menebak "Matang Penuh" untuk buah "Mentah" (meleset 2 tingkat) dihukum sama dengan menebak</text>
+  <text x="24" y="133" class="s" fill="#9b2c22">"Setengah Matang" (meleset 1 tingkat). Padahal bagi pekebun dan pabrik, kesalahan pertama jauh lebih mahal.</text>
+
+  <!-- Panel CORN -->
+  <rect x="8" y="156" width="984" height="202" rx="12" fill="#e3f0e8" stroke="#2f7a4f" stroke-width="1.6"/>
+  <text x="24" y="182" class="t">Metode utama (CORN): empat pertanyaan "ya/tidak" yang berurutan, seperti tangga</text>
+  <g font-size="12.5">
+    <rect x="24" y="198" width="215" height="58" rx="8" fill="#fff" stroke="#2f7a4f"/>
+    <text x="131" y="220" text-anchor="middle" class="s">T1: Lebih matang daripada</text><text x="131" y="238" text-anchor="middle" class="s" font-weight="bold">Mentah?</text>
+    <rect x="266" y="198" width="215" height="58" rx="8" fill="#fff" stroke="#2f7a4f"/>
+    <text x="373" y="220" text-anchor="middle" class="s">T2: Bila ya, lebih matang daripada</text><text x="373" y="238" text-anchor="middle" class="s" font-weight="bold">Setengah Matang?</text>
+    <rect x="508" y="198" width="215" height="58" rx="8" fill="#fff" stroke="#2f7a4f"/>
+    <text x="615" y="220" text-anchor="middle" class="s">T3: Bila ya, lebih matang daripada</text><text x="615" y="238" text-anchor="middle" class="s" font-weight="bold">Matang Penuh?</text>
+    <rect x="750" y="198" width="225" height="58" rx="8" fill="#fff" stroke="#2f7a4f"/>
+    <text x="862" y="220" text-anchor="middle" class="s">T4: Bila ya, lebih matang daripada</text><text x="862" y="238" text-anchor="middle" class="s" font-weight="bold">Terlalu Matang?</text>
+    <path d="M239,227 L264,227" stroke="#33475b" stroke-width="1.6" marker-end="url(#p)"/>
+    <path d="M481,227 L506,227" stroke="#33475b" stroke-width="1.6" marker-end="url(#p)"/>
+    <path d="M723,227 L748,227" stroke="#33475b" stroke-width="1.6" marker-end="url(#p)"/>
+  </g>
+  <text x="24" y="286" class="s"><tspan font-weight="bold">Contoh:</tspan> T1 = ya, T2 = ya, T3 = tidak  →  dua kali "ya"  →  tingkat 2 = <tspan font-weight="bold">Matang Penuh</tspan>.</text>
+  <text x="24" y="308" class="s">Karena setiap pertanyaan menanyakan "lebih matang dari tingkat k?", model dirancang memahami urutan. Harapannya, kesalahan</text>
+  <text x="24" y="326" class="s">jatuh ke tingkat tetangga, bukan melompat jauh. Inilah yang diuji: apakah kesalahan berat (meleset ≥ 2 tingkat) berkurang.</text>
+  <text x="24" y="346" class="s" fill="#4a5d70">Jaringan yang sama (EfficientNet-B0); hanya lapisan terakhir dan cara menghitung kesalahannya (loss) yang berbeda.</text>
+</svg>
