@@ -3,6 +3,9 @@
 venv/
 env/
 
+#model
+outputs/runs
+
 # Python cache
 __pycache__/
 *.py[cod]
