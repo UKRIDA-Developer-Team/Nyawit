@@ -70,7 +70,11 @@ class Predictor:
         }
 
     def gradcam(self, image: Image.Image, target_class: int | None = None) -> Image.Image:
-        """Overlay Grad-CAM di atas gambar yang sudah di-resize/crop seperti input model."""
+        """Overlay Grad-CAM di atas gambar yang sudah di-resize/crop seperti input model.
+
+        Berikan `target_class=pred_level` agar peta menjelaskan kelas yang ditampilkan: pada CORN,
+        tingkat prediksi (median) bisa berbeda dari kelas berpeluang terbesar (default).
+        """
         if self._gradcam is None:
             self._gradcam = GradCAM(self.model, gradcam_target_layer(self.model, self.backbone), self.head)
         x = self.preprocess(image)

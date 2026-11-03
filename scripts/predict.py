@@ -52,7 +52,7 @@ def main() -> None:
         if args.gradcam:
             gdir = Path(args.gradcam)
             gdir.mkdir(parents=True, exist_ok=True)
-            predictor.gradcam(image).save(gdir / f"{path.stem}_gradcam.png")
+            predictor.gradcam(image, target_class=out["pred_level"]).save(gdir / f"{path.stem}_gradcam.png")
 
     if args.json:
         Path(args.json).write_text(json.dumps(to_serializable(results), indent=2, ensure_ascii=False), encoding="utf-8")

@@ -89,7 +89,7 @@ def main() -> None:
         tmp_paths, caps = [], []
         for r in subset.itertuples():
             with Image.open(root / r.rel_path) as img:
-                overlay = predictor.gradcam(img.convert("RGB"))
+                overlay = predictor.gradcam(img.convert("RGB"), target_class=int(r.pred))
             p = out / f"_gradcam_{r.image_id}.png"
             overlay.save(p)
             tmp_paths.append(p)
